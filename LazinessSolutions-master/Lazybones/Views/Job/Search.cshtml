@@ -1,0 +1,105 @@
+﻿@using Lazybones.Models
+
+@model IEnumerable<Lazybones.Models.Job>
+
+@{
+    ViewBag.Title = "Search";
+}
+<h2>Search</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+    <form action="/Job/SearchFilter">
+        <input type="text" name="Title" placeholder="Title Keyword"/>
+        <select name="Category" style="margin-right: 70px">
+           
+            <option value="Category">Category</option>
+            <option value="Carryout">Carryout</option>
+            <option value="Auto Maintenance">Auto Maintenance</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Sloth">Sloth</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="date" name="Date" value="Date"/>
+        
+        <input type="text" name="City" placeholder="City" style="margin-right: 70px"/>
+        Price:
+        <input type="number" name="Low" value="Low" placeholder="Low" style="margin-left: 10px; width:70px"/>
+        <input type="number" name="High" value="High" placeholder="High" style="width: 70px"/>
+        <input type="submit" value="Search" />
+        
+    </form>
+<table class="table">
+    <tr>
+        <th>
+            Job Title
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Last Day
+        </th>
+        <th>
+            City
+        </th>
+        <th style="text-align: right; padding-right: 50px;">
+            Pay
+        </th>
+    </tr>
+    
+            @foreach (var item in Model)
+            {
+<tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+      
+            @if (item.Expirey_Time_Date == null)
+            {
+                <td></td>
+            }
+            else
+                {
+                <td>
+                    @item.Expirey_Time_Date.Value.ToShortDateString()
+                </td>
+                }
+            
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td style="text-align: right; padding-right: 50px;">
+            @Decimal.Round(item.Pay.Value,2)
+            
+        </td>       
+    <td>
+        <a href="Details?id=@item.ID.ToString()"> Details</a>
+    </td>
+    </tr>
+}
+
+</table>
+
+<script type='text/javascript' src='https://us-east-1.online.tableau.com/javascripts/api/viz_v1.js'>
+
+</script>
+<div class='tableauPlaceholder' style='width: 100%; height: 655px; padding-top: 50px;'>
+    <object class='tableauViz' width='100%' height='655' style='display: none;'>
+        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+        <param name='site_root' value='' />
+        <param name='name' value='TaskJeevesFront&#47;Sheet2' />
+        <param name='tabs' value='no' />
+        <param name='toolbar' value='no' />
+    </object>
+</div>
+<hr />
+<footer>
+    <p>&copy; @DateTime.Now.Year Site powered by baby sloths</p>
+</footer>

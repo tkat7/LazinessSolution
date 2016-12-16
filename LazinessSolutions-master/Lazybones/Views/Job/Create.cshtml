@@ -1,0 +1,77 @@
+﻿@model Lazybones.Models.Job
+
+@*@{
+        ViewBag.Title = "Create Job Test";
+    }*@
+
+<h2>Post a New Gig</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6" style="padding-left: 50px; padding-right: 50px;">
+                    <div class="row"><strong>Title: &nbsp;</strong> @Html.EditorFor(model => model.Description)</div>
+                    <div class="row"><strong>Description: &nbsp;</strong> @Html.EditorFor(model => model.Description)</div>
+                    <div class="row">
+                        <strong>Category: &nbsp;</strong>     @Html.DropDownListFor(model => model.Category, new List<SelectListItem> { new SelectListItem { Value = "Carryout", Text = "Carryout" },
+               new SelectListItem { Value = "Auto Maintence", Text = "Auto Maintenance" }, new SelectListItem { Value = "Shopping", Text = "Shopping" }, new SelectListItem { Value = "Sloth", Text = "Sloth" }, new SelectListItem { Value = "Cleaning", Text = "Cleaning" },new SelectListItem { Value = "Other", Text = "Other" } })
+                    </div>
+                    <div class="row"><strong>Flat Rate Pay: &nbsp;</strong> $ @Html.EditorFor(model => model.Pay)</div>
+                    <div class="row"><strong>Starts: &nbsp;</strong>  @Html.EditorFor(model => model.Start_Time_Date, new { htmlAttributes = new { @class = "form-control", type = "date", value = DateTime.Now } })</div>
+                    <div class="row"><strong>Expires: &nbsp;</strong> @Html.EditorFor(model => model.Expirey_Time_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })</div>
+
+
+                </div>
+                <div class="col-sm-6" style="padding-right: 50px;">
+                    <div class="row"><strong>Address: &nbsp;</strong> @Html.EditorFor(model => model.Address)</div>
+                    <div class="row"><strong>City: &nbsp;</strong> @Html.EditorFor(model => model.City)</div>
+                    <div class="row"><strong>State: &nbsp;</strong> @Html.EditorFor(model => model.State)</div>
+                    <div class="row"><strong>Zip: &nbsp;</strong> @Html.EditorFor(model => model.Zip)</div>
+                    <div class="row"><strong>Mobile Phone:</strong> @Html.EditorFor(model => model.Poster_Phone)</div> <hr />
+                    <div class="row" style="text-align: center;">
+                        <strong>Preferred contact method:</strong>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="row">
+                                Call
+                            </div>
+                            <div class="row">@Html.EditorFor(model => model.Contact_By_Phone)</div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                Text
+                            </div>
+                            <div class="row">@Html.EditorFor(model => model.Contact_By_Text)</div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                Email
+                            </div>
+                            <div class="row">@Html.EditorFor(model => model.Contact_By_Email)</div>
+                        </div>
+                    </div><br />
+                </div>
+                <div class="row" style="padding-left: 25px;">@Html.ActionLink("Back to List", "Search")</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Dashboard", "Home")
+</div>
+<hr />
+<footer>
+    <p>&copy; @DateTime.Now.Year Site powered by baby sloths</p>
+</footer>

@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Search";
+}
+<h4 style="text-align: right; padding-right: 5px; font-size: large;"><strong>
+    <a href="Create.cshtml"><span class="glyphicon glyphicon-plus"></span></a>
+    @Html.ActionLink("Create New", "Create")
+</strong></h4>
+    <table class="table">
+        <tr>
+            <th>
+                Job Title
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Expires On
+            </th>
+            <th>
+                City
+            </th>
+            <th style="text-align: right; padding-right: 50px;">
+                Pay
+            </th>
+        </tr>
+
+        @foreach (var item in ViewBag.Jobs)
+            {
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Category
+                </td>
+                @if (item.Expirey_Time_Date == null)
+                {
+                    <td></td>
+                }
+                else
+                {
+                <td>
+                    @item.Expirey_Time_Date.ToShortDateString()
+                </td>
+                }
+                <td>
+                    @item.City
+                </td>
+                <td style="text-align: right; padding-right: 50px;">
+                    @Math.Round(item.Pay,2)                 
+                </td>
+                <td>
+                    <a href="~/Job/Details?id=@item.ID.ToString()"> Details</a>
+                </td>
+            </tr>
+        }
+    </table>

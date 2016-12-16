@@ -1,0 +1,180 @@
+﻿@using System.Activities.Statements
+@using System.IdentityModel.Protocols.WSTrust
+@using System.ServiceModel.Activities
+@using DevExpress.XtraCharts
+@using Lazybones.Models
+@using Microsoft.AspNet.Identity
+@model Lazybones.Models.Job
+<script>
+    function confirmDelete() {
+        document.getElementById("confirmDelete").style.display = "inline";
+    }
+    </script>
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h4>Edit - @Html.DisplayFor(model => model.Title)</h4>
+<hr/>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6" style="padding-left: 50px; padding-right: 50px;">
+                <div class="row">
+                    <table width="550px">
+                        <tr>
+                            <th>
+                                Title:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", value = "title" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Description:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Starts:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.Start_Time_Date, new { htmlAttributes = new { @class = "form-control", type = "date", @Value = Model.Start_Time_Date.Value.ToShortDateString() } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Category:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Flat Rate Pay:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.Pay, new { htmlAttributes = new { @class = "form-control" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Expires:
+                            </th>
+                            @if (Model.Expirey_Time_Date == null)
+                {
+                                <td>
+                                    @Html.EditorFor(model => model.Expirey_Time_Date, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @Html.EditorFor(model => model.Expirey_Time_Date, new { htmlAttributes = new { @class = "form-control", @Value = Model.Expirey_Time_Date.Value.ToShortDateString() } })
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>Address:</th>
+                            <td>
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                City:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                State:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Zip Code:</th>
+                            <td>
+                                @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="text-align: center;">
+                        <tr>
+                            <td></td>
+                            <td>
+                                Call
+                            </td>
+                            <td>
+                                Text
+                            </td>
+                            <td>
+                                Email
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Contact Poster Via:
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.Contact_By_Phone)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Contact_By_Text)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Contact_By_Email)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row" style="float: right; background: beige;"><input type="submit" value="Save" class="btn btn-default"/></div>
+            </div>
+            <div class="col-sm-6" style="padding-left: 100px;">
+                <div class="row"><br /><strong>Status: &nbsp;</strong> @Html.DisplayFor(model => model.Status)</div>
+                @if (Model.Date_Completed == null)
+                {
+                    <div class="row"><strong>Date Completed or Expired: &nbsp;</strong></div>
+                }
+                else
+                {
+                <div class="row"><strong>Date Completed or Expired: &nbsp;</strong> @Html.DisplayFor(model => model.Date_Completed)</div>
+                }
+                <div class="row"><strong>Posted By: &nbsp;</strong> @Html.DisplayFor(model => model.Poster)</div>
+                <div class="row">
+                    <strong>Assigned To: &nbsp;</strong> @Html.DisplayFor(model => model.Getter) |
+                    <img src="http://downloadicons.net/sites/default/files/badge-icon-85756.png" width="35px" /> @Html.DisplayFor(model => model.Getter_Badges)
+                </div>
+                <div class="row">
+                    <strong>Comments History:</strong> <br />
+                    @Html.DisplayFor(model => model.Comment_History)
+                </div>
+                <br /> <br/>
+                <hr/>
+                <br/><br/>
+                <div class="row" style="float: right; padding-right: 25px;">
+                    <input value="Delete" type="button" class="btn" onclick="confirmDelete()" />
+                    <a href="Delete?ID=@Model.ID" class="btn" id="confirmDelete" style="font-size: larger; display: none;">Confirm Delete</a> <br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding-left: 25px; font-size: larger;">@Html.ActionLink("Back to List", "Search")</div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

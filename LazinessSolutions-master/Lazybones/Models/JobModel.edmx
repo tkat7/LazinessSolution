@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LazinessSolutionsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Start Time Date" Type="datetime" />
+          <Property Name="Expirey Time Date" Type="datetime" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pay" Type="money" />
+          <Property Name="Best Bid" Type="bit" Nullable="false" />
+          <Property Name="Picture Location" Type="nvarchar(max)" />
+          <Property Name="Date Completed" Type="date" />
+          <Property Name="Poster Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Getter Name" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Payment Complete" Type="bit" Nullable="false" />
+          <Property Name="Contact By Phone" Type="bit" Nullable="false" />
+          <Property Name="Contact By Email" Type="bit" Nullable="false" />
+          <Property Name="Contact By Text" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" />
+          <Property Name="Getter" Type="nvarchar" MaxLength="256" />
+          <Property Name="Poster" Type="nvarchar" MaxLength="256" />
+          <Property Name="Bid Amount" Type="money" />
+          <Property Name="Same as Home" Type="bit" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="Getter Badges" Type="int" Nullable="false" />
+          <Property Name="Comment History" Type="nvarchar(max)" />
+          <Property Name="Poster Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Getter Phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="LazinessSolutionsModelStoreContainer">
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LazinessSolutionsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Start_Time_Date" Type="DateTime" Precision="3" />
+          <Property Name="Expirey_Time_Date" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Best_Bid" Type="Boolean" Nullable="false" />
+          <Property Name="Picture_Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Completed" Type="DateTime" Precision="0" />
+          <Property Name="Poster_Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Getter_Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contact_By_Phone" Type="Boolean" Nullable="false" />
+          <Property Name="Contact_By_Email" Type="Boolean" Nullable="false" />
+          <Property Name="Contact_By_Text" Type="Boolean" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Getter" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Poster" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Bid_Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Same_as_Home" Type="Boolean" Nullable="false" />
+          <Property Name="Payment_Complete" Type="Boolean" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Getter_Badges" Type="Int32" Nullable="false" />
+          <Property Name="Comment_History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Poster_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Getter_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="LazinessSolutionsEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LazinessSolutionsModelStoreContainer" CdmEntityContainer="LazinessSolutionsEntities6">
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="LazinessSolutionsModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="Getter_Phone" ColumnName="Getter Phone" />
+                <ScalarProperty Name="Poster_Phone" ColumnName="Poster Phone" />
+                <ScalarProperty Name="Comment_History" ColumnName="Comment History" />
+                <ScalarProperty Name="Getter_Badges" ColumnName="Getter Badges" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Payment_Complete" ColumnName="Payment Complete" />
+                <ScalarProperty Name="Same_as_Home" ColumnName="Same as Home" />
+                <ScalarProperty Name="Bid_Amount" ColumnName="Bid Amount" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="Getter" ColumnName="Getter" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start_Time_Date" ColumnName="Start Time Date" />
+                <ScalarProperty Name="Expirey_Time_Date" ColumnName="Expirey Time Date" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Pay" ColumnName="Pay" />
+                <ScalarProperty Name="Best_Bid" ColumnName="Best Bid" />
+                <ScalarProperty Name="Picture_Location" ColumnName="Picture Location" />
+                <ScalarProperty Name="Date_Completed" ColumnName="Date Completed" />
+                <ScalarProperty Name="Poster_Name" ColumnName="Poster Name" />
+                <ScalarProperty Name="Getter_Name" ColumnName="Getter Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Contact_By_Phone" ColumnName="Contact By Phone" />
+                <ScalarProperty Name="Contact_By_Email" ColumnName="Contact By Email" />
+                <ScalarProperty Name="Contact_By_Text" ColumnName="Contact By Text" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

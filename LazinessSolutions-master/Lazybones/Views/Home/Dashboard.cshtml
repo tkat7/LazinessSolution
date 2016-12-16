@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+<section>
+    <div class="container-fluid"></div>
+    <div class="row">
+        <div class="col-sm-12">@Html.Partial("~/Views/Manage/UserProfile.cshtml")</div>
+    </div>
+    
+</section>
+<hr/>
+
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist" style="font-size: large;">
+            <li role="presentation" class="active"><a href="#home1" data-toggle="tab" role="tab" aria-controls="tab1">My Active Posts</a></li>
+            <li role="presentation"><a href="#paneTwo1" data-toggle="tab" role="tab" aria-controls="tab2">Gigs I'm Working</a></li>
+            <li role="presentation"><a href="#paneThree1" data-toggle="tab" role="tab" aria-controls="tab2">History</a></li>
+        </ul>
+        <div id="tabContent1" class="tab-content" style="background-color: #FFF;">
+            
+                <div role="tabpanel" class="tab-pane fade in active" id="home1">
+                    @Html.Action("InnerSearch", "Job")
+                </div>
+            <div role="tabpanel" class="tab-pane fade" id="paneTwo1">
+                @Html.Action("GetterDash", "Job")
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="paneThree1">
+                @Html.Action("History", "Job")
+            </div>
+            </div>
+    </div>
+<div>
+@for (int x = 0; x < ViewBag.Badges; x++)
+{
+    <img src="http://i.imgur.com/Ri6N46q.png" width="200"/>
+}
+    </div>

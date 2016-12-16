@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Search";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Job Title
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Date Completed
+        </th>
+        <th>
+            City
+        </th>
+        <th style="text-align: right; padding-right: 50px;">
+            Pay
+        </th>
+        <th>
+            Poster
+        </th>
+        <th>
+            Getter
+        </th>
+    </tr>
+
+    @foreach (var item in ViewBag.Jobs)
+            {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Category
+            </td>
+            <td>
+                @item.Date_Completed.ToShortDateString()
+            </td>
+            <td>
+                @item.City
+            </td>
+            <td style="text-align: right; padding-right: 50px;">
+                @Math.Round(item.Pay, 2)
+            </td>
+            <td>
+                @item.Poster
+            </td>
+            <td>
+                @item.Getter
+            </td>
+            <td>
+                <a href="~/Job/Details?id=@item.ID.ToString()"> Details</a>
+            </td>
+        </tr>
+    }
+</table>
+

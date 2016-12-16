@@ -1,0 +1,124 @@
+﻿@using Microsoft.AspNet.Identity
+@model Lazybones.Models.Job
+<script>
+    function commentsDisplay() {
+        document.getElementById("comments").style.display = "inline";
+    }
+    function commentsHide() {
+        document.getElementById("comments").style.display = "none";
+    }
+    function confirmDelete() {
+        document.getElementById("confirmDelete").style.display = "inline";
+    }
+    function confirmTake() {
+        document.getElementById("take").style.display = "inline";
+    }
+</script>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ID)
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <hr />
+    if (Model.Poster != User.Identity.GetUserName() && Model.Getter == null)
+    {
+        <input type="button" class="btn btn-info" onclick="confirmTake()" value="Take This Gig" style="float: right;">
+        <a href="SetGetter?ID=@Model.ID" class="btn" class="btn btn-info" id="take" role="button" style="float: right; display: none;">Confirm Gig</a>
+    }
+    if (((Model.Poster == User.Identity.GetUserName()) || (Model.Getter == User.Identity.GetUserName())) && (Model.Getter != null) && (Model.Status == "Assigned") && (Model.Payment_Complete == true))
+    {
+        <a href="MarkComplete?ID=@Model.ID" class="btn btn-info" role="button" style="float: right;">Mark as Complete</a>
+    }
+    if (((Model.Poster == User.Identity.GetUserName()) || (Model.Getter == User.Identity.GetUserName())) && (Model.Getter != null) && (Model.Status == "Assigned") && (Model.Payment_Complete == false
+    ))
+    {
+        <a href="MarkAsPaid?ID=@Model.ID" class="btn btn-info" role="button" style="float: right;">Mark as Paid</a>
+    }
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6" style="padding-left: 50px; padding-right: 50px;">
+                <div class="row"><strong>Description: &nbsp;</strong> @Html.DisplayFor(model => model.Description)</div>
+                <div class="row"><strong>Category: &nbsp;</strong> @Html.DisplayFor(model => model.Category)</div>
+                <div class="row"><strong>Flat Rate Pay: &nbsp;</strong> $ @Html.DisplayFor(model => model.Pay)</div>
+                <div class="row"><strong>Starts: &nbsp;</strong> @Model.Start_Time_Date.Value.ToShortDateString()</div>
+                <div class="row"><strong>Expires: &nbsp;</strong> @Model.Expirey_Time_Date.Value.ToShortDateString()</div>
+                <div class="row"><strong>Address: &nbsp;</strong> @Html.DisplayFor(model => model.Address)</div>
+                <div class="row"><strong>City: &nbsp;</strong> @Html.DisplayFor(model => model.City)</div>
+                <div class="row"><strong>State: &nbsp;</strong> @Html.DisplayFor(model => model.State)</div>
+                <div class="row"><strong>Zip: &nbsp;</strong> @Html.DisplayFor(model => model.Zip)</div>
+                <div class="row"><strong>Mobile Phone:</strong> @Html.DisplayFor(model => model.Poster_Phone)</div><br />
+                <div class="row" style="text-align: center;"><strong>Poster's preferred contact method:</strong></div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="row">
+                            Call
+                        </div>
+                        <div class="row">@Html.DisplayFor(model => model.Contact_By_Phone)</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            Text
+                        </div>
+                        <div class="row">@Html.DisplayFor(model => model.Contact_By_Text)</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            Email
+                        </div>
+                        <div class="row">@Html.DisplayFor(model => model.Contact_By_Email)</div>
+                    </div>
+                </div><br />
+            </div>
+            <div class="col-sm-6" style="padding-right: 50px;">
+                <div class="row"><br /><strong>Status: &nbsp;</strong> @Html.DisplayFor(model => model.Status)</div>
+                <div class="row"><strong>Date Completed or Expired: &nbsp;</strong> @Html.DisplayFor(model => model.Date_Completed)</div>
+                <div class="row">
+                    <strong>Payment Complete? &nbsp;</strong> @Html.DisplayFor(model => model.Payment_Complete) &nbsp;
+
+                    @if (Model.Payment_Complete == false & Model.Poster == User.Identity.GetUserName())
+                    {
+                        <a href="https://venmo.com/?txn=pay&audience=private&recipients=@(Model.Getter)&amount=@(Model.Pay)&note=@(Model.Title)" target="_blank" class="btn" style="font-size: large;"><img src="http://i.imgur.com/4WjiVhY.png" /> Send Payment with Venmo</a>
+                    }
+                </div>
+                <div class="row"><strong>Posted By: &nbsp;</strong> @Html.DisplayFor(model => model.Poster)</div>
+                <div class="row">
+                    <strong>Assigned To: &nbsp;</strong> @Html.DisplayFor(model => model.Getter)
+                    <img src="http://downloadicons.net/sites/default/files/badge-icon-85756.png" width="35px" />@Html.DisplayFor(model => model.Getter_Badges)
+                </div>
+                <div class="row">
+                    @if ((Model.Poster == User.Identity.GetUserName()) || (Model.Getter == User.Identity.GetUserName()))
+                    {
+                    <input type="button" class="btn" onclick="commentsDisplay()" value="Add a Comment"> }
+                    <div id="comments" style="display: none;">
+                        <br /> <br />
+                        <div>@Html.TextAreaFor(model => model.Comments, new { @style = "width: 80%;", @Value="" })</div>
+                        <div style="float: right; padding-right: 120px;">
+                            <input type="submit" value="Save" style="background: beige;" class="btn btn-default" /> &nbsp; <input type="button" class="btn" onclick="commentsHide()" value="Nevermind">
+                        </div><br />
+                    </div> <br /><br />
+                    <div style="text-align: center;">
+                        <strong>Comments History:</strong> <br />
+                    </div>
+                    @Html.DisplayFor(model => model.Comment_History)
+                </div>
+            </div>
+        </div>
+        <div class="row" style="float: right; padding-right: 25px;">
+            @if ((Model.Poster == User.Identity.GetUserName()) && (Model.Status != "Complete"))
+            {
+                <input type="button" value="Edit Gig Details" onclick="location.href='@Url.Action("Edit", new { id = Model.ID })'" />
+            }
+            &nbsp;
+            &nbsp;
+            @if (((Model.Status == "Assigned") || (Model.Status == "Created")) && (Model.Poster == User.Identity.GetUserName()))
+            {
+                <input value="Delete" type="button" onclick="confirmDelete()" />
+            }
+            <a href="Delete?ID=@Model.ID" class="btn" id="confirmDelete" style="display: none;">Confirm Delete</a> <br />
+        </div><br />
+        <div class="row" style="padding-left: 25px;">@Html.ActionLink("Back to List", "Search")</div>
+    </div>
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year Site powered by baby sloths</p>
+    </footer>
+}

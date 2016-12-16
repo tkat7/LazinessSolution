@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Lazybones.Models.Job>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_Time_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expirey_Time_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Best_Bid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preferred_Contact_Method)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture_Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Completed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Poster_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Getter_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_Time_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expirey_Time_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Best_Bid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preferred_Contact_Method)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Picture_Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Completed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Poster_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Getter_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

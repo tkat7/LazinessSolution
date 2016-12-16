@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNet.Identity
+@using Lazybones.Models
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        
+            
+            @{ 
+
+                LazinessSolutionsEntities4 userProf = new LazinessSolutionsEntities4();
+                var x = userProf.AspNetUsers.Find(User.Identity.GetUserId()).Badge_Count;
+                var u = userProf.AspNetUsers.Find(User.Identity.GetUserId()).First_Name;
+            }
+        <li style="color: #ffffff;font-size:35px">
+            @x &nbsp;<img src="http://i.imgur.com/Ri6N46q.png" width="50"/>
+            </li>
+            <li>
+            <!--<a href="Manage/Index">Hello @u!</a>--> @Html.ActionLink("Hello, "+@u+"!", "Index", "Manage" )
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

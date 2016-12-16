@@ -1,0 +1,25 @@
+@Html.DevExpress().PivotGrid(settings => {
+    settings.Name = "OpenGigs";
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "GigPivotGridPartial" };
+
+		settings.Fields.Add(field => {
+        field.Area = PivotArea.FilterArea;
+        field.FieldName = "Title";
+        field.Caption = "Title";
+    });
+		settings.Fields.Add(field => {
+        field.Area = PivotArea.FilterArea;
+        field.FieldName = "Category";
+        field.Caption = "Category";
+    });
+		settings.Fields.Add(field => {
+        field.Area = PivotArea.FilterArea;
+        field.FieldName = "Location";
+        field.Caption = "Location";
+    });
+		settings.Fields.Add(field => {
+        field.Area = PivotArea.FilterArea;
+        field.FieldName = "Status";
+        field.Caption = "Status";
+    });
+	}).Bind(Model).GetHtml()

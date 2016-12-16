@@ -1,0 +1,56 @@
+﻿
+
+@{
+    ViewBag.Title = "Search";
+}
+<h4>Open Assignments</h4>
+
+<p>
+    @Html.ActionLink("Search for New Gig", "Search")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Job Title
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Expires On
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            Pay
+        </th>
+    </tr>
+
+    @foreach (var item in ViewBag.Jobs)
+            {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.Category
+            </td>
+            <td>
+                @item.Expirey_Time_Date
+            </td>
+            <td>
+                @item.City
+            </td>
+            <td>
+                @item.Pay
+            </td>
+            <td>
+                <a href="Details?id=@item.ID.ToString()"> Details</a>
+            </td>
+        </tr>
+    }
+
+</table>
+

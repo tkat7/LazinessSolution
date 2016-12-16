@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNet.Identity
+@using Lazybones.Models
+@model Lazybones.Models.AspNetUser
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h3>Account Profile</h3>
+
+    @Html.HiddenFor(model => model.Id)
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-6">
+                    First Name <br />
+                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-sm-6">
+                    Last Name <br />
+                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    Mobile Phone Number <br />
+                    @Html.EditorFor(model => model.Mobile_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-sm-8">
+                    Email <br />
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    Street Address <br />
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    City <br />
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-sm-2">
+                    State <br />
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-sm-4">
+                    Zip Code <br />
+                    @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" style="height: 220px; background-image: url(http://i.imgur.com/b5eooPo.png); background-size: contain; background-position: center;">
+            <br/><br/>
+            <h3 style="text-align: center;"><strong>Proud owner of @Html.DisplayFor(model => model.Badge_Count) Beautiful Baby Sloth Badges</strong></h3>
+            <div style="text-align: right"><em>Good job, me!</em></div>
+        </div>
+    </div>
+    <div class="row">
+        <br />
+        <div class="col-sm-offset-10 col-sm-12">
+            <input type="submit" value="Save" class="btn btn-lg" style="background: beige;" />
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,90 @@
+﻿@using Lazybones.Models
+@model Lazybones.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <h3>All fields are required</h3>
+    <div class="container-fluid, form-horizontal">
+        <!-- email & pass -->
+        <div class="col-md-8">
+            <div class="row">
+                First Name <br />
+                @Html.EditorFor(m => m.First_Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="row">
+                Last Name <br />
+                @Html.EditorFor(m => m.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="row">
+                Email <br />
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="row">
+                Password <br />
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+            <div class="row">
+                Confirm Password <br />
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+            <div class="row">
+                Home Address
+                <br />
+                @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="row">
+                City <br />
+                @Html.EditorFor(m => m.City, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="row">
+                State <br />
+                @Html.EditorFor(m => m.State, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="row">
+                Zip Code <br />
+                @Html.EditorFor(m => m.Zip, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="row">
+                Mobile Phone <br />
+                @Html.EditorFor(m => m.Mobile_Phone, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <br />
+            <div style="float: right;">
+                <strong>I am a</strong> <br />
+                Gig Poster &nbsp;
+                <div class="checkbox-inline" style="padding-right: 5px;">
+                    @Html.EditorFor(m => m.Gig_Poster)
+                </div> <br />
+                Go-Getter &nbsp;
+                <div class="checkbox-inline">
+                    @Html.EditorFor(m => m.Go_Getter)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            
+            <img width="100%" style="padding-top: 20px;" src="http://static.boredpanda.com/blog/wp-content/uploads/2016/10/cute-sloths-57f269182f5ab__700.jpg"/> 
+        </div>
+    </div>
+
+
+    <div class="form-group" style="margin-top: 50px;">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
